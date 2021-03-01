@@ -1,8 +1,12 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
+  get 'listing/index'
+  get 'listing/search'
+  get 'category/index'
   get '/privacy', to: 'home#privacy'
   get '/terms', to: 'home#terms'
+#  get '/search', to: 'listing#search'
     authenticate :user, lambda { |u| u.admin? } do
       mount Sidekiq::Web => '/sidekiq'
     end
